@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DealerSync Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+  <!-- ── Login ── -->
+  <div id="login-section">
+    <div class="login-card">
+      <div class="brand-header">
+        <img class="brand-logo" src="logo-mark.png" onerror="this.style.display='none'" alt="" />
+        <span class="brand-name">Dealer<span class="brand-name-accent">Sync</span></span>
+      </div>
+      <h2>Manager Dashboard</h2>
+      <input id="login-email"    type="email"    placeholder="Email" autocomplete="email" />
+      <input id="login-password" type="password" placeholder="Password" autocomplete="current-password" />
+      <button id="login-btn" class="primary-btn">Log in</button>
+      <p id="login-error" class="error"></p>
+      <p>Accounts are created in the DealerSync Chrome extension. Log in here with the same credentials.</p>
+    </div>
+  </div>
+
+  <!-- ── Rep landing (reps don't use the dashboard) ── -->
+  <div id="rep-section" class="hidden">
+    <div class="login-card">
+      <div class="brand-header">
+        <img class="brand-logo" src="logo-mark.png" onerror="this.style.display='none'" alt="" />
+        <span class="brand-name">Dealer<span class="brand-name-accent">Sync</span></span>
+      </div>
+      <h2>You're all set!</h2>
+      <p style="color:#ece9e2;margin-bottom:8px">
+        You've been added as a sales rep. Use the
+        <strong>DealerSync Chrome extension</strong> to scrape and post vehicles to Facebook Marketplace.
+      </p>
+      <p>Your manager can track your activity from this dashboard.</p>
+      <br />
+      <button id="rep-signout-btn" class="link-btn">Sign out</button>
+    </div>
+  </div>
+
+  <!-- ── Dashboard ── -->
+  <div id="dashboard-section" class="hidden">
+
+    <!-- Top bar -->
+    <nav class="topbar">
+      <div class="brand-header">
+        <img class="brand-logo" src="logo-mark.png" onerror="this.style.display='none'" alt="" />
+        <span class="brand-name">Dealer<span class="brand-name-accent">Sync</span></span>
+      </div>
+      <span id="dealership-name-display"></span>
+      <div class="topbar-actions">
+        <button id="signout-btn" class="link-btn">Sign out</button>
+      </div>
+    </nav>
+
+    <div class="dash-body">
+
+      <!-- Metric cards -->
+      <div class="metrics-bar">
+        <div class="metric-card">
+          <div class="metric-value" id="m-total">—</div>
+          <div class="metric-label">Vehicles Scraped</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value" id="m-listed">—</div>
+          <div class="metric-label">Posted to Marketplace</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value" id="m-compliance">—</div>
+          <div class="metric-label">Compliance Rate</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value" id="m-avg-days">—</div>
+          <div class="metric-label">Avg Days on Market</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value" id="m-sold">—</div>
+          <div class="metric-label">Sold</div>
+        </div>
+      </div>
+
+      <!-- Tab bar -->
+      <div class="tab-bar">
+        <button class="tab-btn active" data-tab="overview">Team Overview</button>
+        <button class="tab-btn"        data-tab="vehicles">Vehicles</button>
+        <button class="tab-btn"        data-tab="team">Team</button>
+      </div>
+
+      <!-- Tab: Team Overview -->
+      <div id="tab-overview" class="tab-content active">
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Rep</th>
+                <th>Scraped</th>
+                <th>Listed</th>
+                <th>Sold</th>
+                <th>Compliance</th>
+                <th>Avg Days on Market</th>
+              </tr>
+            </thead>
+            <tbody id="overview-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab: Vehicles -->
+      <div id="tab-vehicles" class="tab-content">
+        <div class="filter-bar">
+          <select id="filter-rep">
+            <option value="">All reps</option>
+          </select>
+          <select id="filter-status">
+            <option value="">All status</option>
+            <option value="listed">Listed (active)</option>
+            <option value="sold">Sold</option>
+            <option value="unlisted">Not yet listed</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Vehicle</th>
+                <th>Rep</th>
+                <th>Scraped</th>
+                <th>Listed</th>
+                <th>Days Active</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="vehicles-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab: Team -->
+      <div id="tab-team" class="tab-content">
+        <div class="team-header">
+          <h3>Sales Reps</h3>
+          <button id="invite-btn" class="ghost-btn">+ Invite Sales Rep</button>
+        </div>
+        <div id="rep-grid" class="rep-grid"></div>
+      </div>
+
+    </div><!-- /dash-body -->
+  </div><!-- /dashboard-section -->
+
+  <!-- ── Invite Modal ── -->
+  <div id="invite-modal" class="modal hidden">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-card">
+      <h3>Invite Sales Rep</h3>
+      <input id="invite-email" type="email"    placeholder="Rep's email address" />
+      <input id="invite-name"  type="text"     placeholder="Rep's name (optional)" />
+      <p id="invite-error"   class="error"></p>
+      <p id="invite-success" class="success"></p>
+      <div class="modal-actions">
+        <button id="invite-cancel-btn" class="link-btn">Cancel</button>
+        <button id="invite-send-btn"   class="primary-btn">Send Invite</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>
