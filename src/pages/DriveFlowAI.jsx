@@ -25,7 +25,7 @@ export default function DriveFlowAI() {
       <section className="pt-40 pb-20 px-6">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <ScrollReveal>
-            <img src="/driveflow-logo.png" alt="Drive Flow AI" className="h-16 mb-8 object-contain" />
+            <img src="/driveflow-logo-transparent.png" alt="Drive Flow AI" className="h-28 mb-8 object-contain" />
             <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
               Every Lead. Every Follow-Up. <span className="text-gradient-gold">Every Appointment.</span>
             </h1>
