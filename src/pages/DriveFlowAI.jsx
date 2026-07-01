@@ -31,9 +31,14 @@ export default function DriveFlowAI() {
             <p className="text-white/70 text-lg mb-8">
               Drive Flow AI is an AI-powered automotive CRM that manages customer communication automatically so your team spends less time chasing leads and more time selling vehicles.
             </p>
-            <a href="/contact" className="inline-block bg-gold-gradient text-charcoal font-semibold px-7 py-4 rounded-full shadow-gold hover:scale-105 transition-transform">
-              Book a Demo
-            </a>
+            <div className="flex flex-wrap gap-4">
+              <a href="/contact" className="inline-block bg-gold-gradient text-charcoal font-semibold px-7 py-4 rounded-full shadow-gold hover:scale-105 transition-transform">
+                Book a Demo
+              </a>
+              <a href="/dashboard/" className="inline-block glass border border-white/10 text-white font-semibold px-7 py-4 rounded-full hover:border-gold/50 hover:text-gold transition-colors">
+                Dealer Login
+              </a>
+            </div>
           </ScrollReveal>
           <ScrollReveal delay={150}>
             <DashboardMockup />

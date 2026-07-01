@@ -30,9 +30,14 @@ export default function DealerSync() {
               Dealer Sync automatically scrapes your dealership inventory, imports photos and vehicle information, then publishes professional Facebook Marketplace listings in approximately 60 seconds.
             </p>
             <p className="text-white/50 text-sm mb-8">No copying. No typing. No missed listings. Everything automated.</p>
-            <a href="/contact" className="inline-block bg-gold-gradient text-charcoal font-semibold px-7 py-4 rounded-full shadow-gold hover:scale-105 transition-transform">
-              Book a Demo
-            </a>
+            <div className="flex flex-wrap gap-4">
+              <a href="/contact" className="inline-block bg-gold-gradient text-charcoal font-semibold px-7 py-4 rounded-full shadow-gold hover:scale-105 transition-transform">
+                Book a Demo
+              </a>
+              <a href="/dashboard/" className="inline-block glass border border-white/10 text-white font-semibold px-7 py-4 rounded-full hover:border-gold/50 hover:text-gold transition-colors">
+                Dealer Login
+              </a>
+            </div>
           </ScrollReveal>
           <ScrollReveal delay={150}>
             <DashboardMockup />
