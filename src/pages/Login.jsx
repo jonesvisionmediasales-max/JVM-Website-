@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import ScrollReveal from '../components/ScrollReveal'
 import GlassCard from '../components/GlassCard'
 import { signIn } from '../lib/auth'
@@ -69,12 +69,6 @@ export default function Login() {
                 {status === 'loading' ? 'Logging in…' : 'Log In'}
               </button>
 
-              <p className="text-center text-white/50 text-sm">
-                Don't have an account?{' '}
-                <Link to="/signup" className="text-gold hover:underline">
-                  Sign up
-                </Link>
-              </p>
             </form>
           </GlassCard>
         </ScrollReveal>

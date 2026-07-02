@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -9,7 +9,6 @@ import DriveFlowAI from './pages/DriveFlowAI'
 import DealerSync from './pages/DealerSync'
 import Contact from './pages/Contact'
 import Login from './pages/Login'
-import Signup from './pages/Signup'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import Support from './pages/Support'
 
@@ -35,9 +34,9 @@ export default function App() {
           <Route path="/dealer-sync" element={<DealerSync />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/signup" element={<Navigate to="/login" replace />} />
         </Routes>
       </main>
       <Footer />
