@@ -48,9 +48,9 @@ export default function Navbar() {
         </div>
 
         <div className="hidden lg:flex items-center gap-4">
-          <Link to="/login" className="text-sm font-medium text-white/75 hover:text-white">
+          <a href="/dashboard/" className="text-sm font-medium text-white/75 hover:text-white">
             Log In
-          </Link>
+          </a>
           <Link
             to="/contact"
             className="bg-gold-gradient text-charcoal text-sm font-semibold px-5 py-2.5 rounded-full shadow-gold hover:scale-105 transition-transform"
@@ -84,13 +84,13 @@ export default function Navbar() {
               {l.label}
             </NavLink>
           ))}
-          <Link
-            to="/login"
+          <a
+            href="/dashboard/"
             onClick={() => setOpen(false)}
             className="text-sm font-medium text-white/80"
           >
             Log In
-          </Link>
+          </a>
           <Link
             to="/contact"
             onClick={() => setOpen(false)}
