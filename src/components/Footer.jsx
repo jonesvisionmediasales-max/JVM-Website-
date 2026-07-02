@@ -68,6 +68,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-center gap-3 text-center text-xs text-white/40">
         <span>© {new Date().getFullYear()} Jones Vision Media. All rights reserved.</span>
         <span className="hidden sm:inline">·</span>
+        <Link to="/support" className="hover:text-white/70">Support</Link>
+        <span className="hidden sm:inline">·</span>
         <Link to="/privacy-policy" className="hover:text-white/70">
           DealerSync Privacy Policy
         </Link>
