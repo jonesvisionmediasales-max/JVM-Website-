@@ -1,5 +1,9 @@
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY
+// Falls back to the public project values when build-time env vars aren't set
+// (e.g. on Vercel, where .env is gitignored). The anon key is a publishable
+// client key — data is protected by Supabase Row Level Security, not by hiding
+// this key, which is why it also ships in the extension and dashboard.
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://dzmalgsbmxbyaejwfdox.supabase.co'
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR6bWFsZ3NibXhieWFlandmZG94Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyNTY1NDAsImV4cCI6MjA5NzgzMjU0MH0.CAQxTHkQR3dwWzuG4U6JPrg9YmDtoJPLpgXHcYlUfoc'
 
 const SESSION_KEY = 'jvm_session'
 
