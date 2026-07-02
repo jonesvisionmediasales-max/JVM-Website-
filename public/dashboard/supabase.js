@@ -78,7 +78,7 @@ export async function getProfile() {
   const session = getStoredSession();
   if (!session) return null;
   const res  = await authedFetch(
-    `/rest/v1/profiles?id=eq.${session.user.id}&select=*,dealership:dealerships(id,name)`
+    `/rest/v1/profiles?id=eq.${session.user.id}&select=*,dealership:dealerships(id,name,warranty_text,product_benefits,specials)`
   );
   const body = await res.json();
   return body[0] || null;
@@ -107,6 +107,19 @@ export async function createProfile(dealershipId, role, fullName, email) {
   return body[0];
 }
 
+// ─── Dealership settings (warranty / benefits / specials) ─────────────────────
+
+export async function saveDealershipSettings(dealershipId, patch) {
+  const res  = await authedFetch(`/rest/v1/dealerships?id=eq.${dealershipId}`, {
+    method:  'PATCH',
+    headers: { Prefer: 'return=representation' },
+    body:    JSON.stringify(patch),
+  });
+  const body = await res.json();
+  if (!res.ok) throw new Error(body.message || 'Failed to save settings');
+  return body[0];
+}
+
 // ─── Dashboard data ───────────────────────────────────────────────────────────
 
 export async function getDealershipReps(dealershipId) {
@@ -116,11 +129,41 @@ export async function getDealershipReps(dealershipId) {
   return body;
 }
 
+// Managers get every dealership vehicle via RLS; reps get only their own.
 export async function getDealershipVehicles() {
   const res  = await authedFetch('/rest/v1/vehicles?select=*&order=scraped_at.desc');
   const body = await res.json();
   if (!res.ok) throw new Error(body.message || 'Failed to fetch vehicles');
   return body;
+}
+
+export async function addVehicle(fields) {
+  const session = getStoredSession();
+  const row = {
+    ...fields,
+    dealer_id:    session.user.id,
+    manual_entry: true,
+    scraped_at:   new Date().toISOString(),
+  };
+  const res  = await authedFetch('/rest/v1/vehicles', {
+    method:  'POST',
+    headers: { Prefer: 'return=representation' },
+    body:    JSON.stringify(row),
+  });
+  const body = await res.json();
+  if (!res.ok) throw new Error(body.message || 'Failed to add vehicle');
+  return body[0];
+}
+
+export async function markVehicleListed(vehicleId) {
+  const res  = await authedFetch(`/rest/v1/vehicles?id=eq.${vehicleId}`, {
+    method:  'PATCH',
+    headers: { Prefer: 'return=representation' },
+    body:    JSON.stringify({ listed_at: new Date().toISOString() }),
+  });
+  const body = await res.json();
+  if (!res.ok) throw new Error(body.message || 'Failed to mark listed');
+  return body[0];
 }
 
 export async function markVehicleSold(vehicleId) {
@@ -140,6 +183,11 @@ export async function unmarkVehicleSold(vehicleId) {
     body:   JSON.stringify({ sold_at: null }),
   });
   if (!res.ok) throw new Error('Failed to unmark sold');
+}
+
+export async function deleteVehicle(vehicleId) {
+  const res = await authedFetch(`/rest/v1/vehicles?id=eq.${vehicleId}`, { method: 'DELETE' });
+  if (!res.ok) throw new Error('Failed to delete vehicle');
 }
 
 export async function inviteRep(email, fullName) {
