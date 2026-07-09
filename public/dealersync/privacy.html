@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>DealerSync Privacy Policy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 20px; color: #1c1e21; line-height: 1.6; }
+  h1 { font-size: 24px; }
+  h2 { font-size: 18px; margin-top: 32px; }
+  .updated { color: #65676b; font-size: 14px; }
+</style>
+</head>
+<body>
+<h1>DealerSync Privacy Policy</h1>
+<p class="updated">Last updated: July 9, 2026</p>
+
+<p>
+DealerSync ("the extension") is a Chrome extension built by Jones Vision Media for car
+dealerships. This page explains what data DealerSync collects, how it's used, and how
+it's stored.
+</p>
+
+<h2>Who this applies to</h2>
+<p>
+DealerSync is intended for use by dealership staff who have created a DealerSync
+account. It is not intended for use by, and does not knowingly collect data from,
+the general public or consumers browsing a dealer's website or Facebook Marketplace.
+</p>
+
+<h2>What data we collect</h2>
+<ul>
+  <li><strong>Account information:</strong> the email address and dealership name you provide when creating a DealerSync account.</li>
+  <li><strong>Vehicle data:</strong> when you click "Scrape this page" on your own dealership's website, DealerSync reads publicly visible vehicle details already shown on that page — year, make, model, trim, price, mileage, VIN, color, and photo URLs — and saves them to your DealerSync account.</li>
+  <li><strong>AI-generated descriptions:</strong> vehicle details you scrape are sent to Anthropic's Claude API to generate a listing description, which is stored in your account.</li>
+  <li><strong>Dealer settings:</strong> optional settings you configure, such as a default warranty disclosure for buy-here-pay-here listings.</li>
+  <li><strong>Lead form submissions:</strong> if you submit the "work with us" form on Jones Vision Media's marketing site, the information you provide (dealership name, contact name, email, phone, message) is stored so we can follow up.</li>
+</ul>
+
+<h2>What we do not collect</h2>
+<p>
+DealerSync does not collect or transmit your Facebook account credentials, Facebook
+session data, or information about other people's Facebook activity. It does not track
+your browsing activity outside of the specific pages where you actively click "Scrape
+this page" or "Use on Marketplace." It does not sell or share your data with third
+parties for advertising purposes.
+</p>
+
+<h2>How data is used</h2>
+<p>
+Vehicle data and photos you scrape are used solely to: (1) save a record you can review
+in the extension, (2) generate an AI description via the Claude API, and (3) fill in
+that same data into a Facebook Marketplace listing form when you click "Use on
+Marketplace." Photo URLs are fetched, temporarily held in memory, and inserted into the
+Marketplace upload widget — they are not stored anywhere beyond your DealerSync account
+record.
+</p>
+
+<h2>Where data is stored</h2>
+<p>
+Account and vehicle data is stored in a Supabase-hosted PostgreSQL database operated for
+Jones Vision Media, secured with row-level security so that each dealership can only
+access its own data. AI description generation is processed by Anthropic's Claude API
+under Anthropic's own data handling terms.
+</p>
+
+<h2>Permissions DealerSync requests, and why</h2>
+<ul>
+  <li><strong>Read and change data on facebook.com:</strong> required to fill in form fields on Facebook Marketplace's listing creation pages.</li>
+  <li><strong>Access to the page you're viewing, when you click "Scrape this page":</strong> Chrome grants DealerSync one-time access to the current tab so it can read the vehicle details shown there. DealerSync has no standing access to your dealership website or any other site.</li>
+  <li><strong>Storage:</strong> used to keep you signed in between browser sessions.</li>
+  <li><strong>Optional access to a specific website (requested at the moment you click "Upload Photos"):</strong> required to fetch your vehicle's photo files from wherever your dealership hosts them, so they can be attached to the Marketplace listing. This permission is requested per-domain, only when needed, and you can decline it.</li>
+</ul>
+
+<h2>Data deletion</h2>
+<p>
+You can delete any saved vehicle from within the extension at any time. To delete your
+entire account and all associated data, contact us at the email below.
+</p>
+
+<h2>Contact</h2>
+<p>
+Jones Vision Media<br />
+Email: <a href="mailto:jonesvisionmedia.sales@gmail.com">jonesvisionmedia.sales@gmail.com</a><br />
+Website: <a href="https://jvm-systems.com">jvm-systems.com</a>
+</p>
+</body>
+</html>
