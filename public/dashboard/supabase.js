@@ -85,14 +85,20 @@ export async function getProfile() {
 }
 
 export async function createDealership(name) {
-  const res  = await authedFetch('/rest/v1/dealerships', {
-    method:  'POST',
-    headers: { Prefer: 'return=representation' },
-    body:    JSON.stringify({ name }),
+  // The id is generated client-side and the row is NOT read back: RLS only
+  // lets members SELECT their dealership, and the caller has no profile yet
+  // at bootstrap time — asking for return=representation makes the whole
+  // insert fail with an RLS violation (chicken-and-egg).
+  const id  = crypto.randomUUID();
+  const res = await authedFetch('/rest/v1/dealerships', {
+    method: 'POST',
+    body:   JSON.stringify({ id, name }),
   });
-  const body = await res.json();
-  if (!res.ok) throw new Error(body.message || 'Failed to create dealership');
-  return body[0];
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.message || 'Failed to create dealership');
+  }
+  return { id, name };
 }
 
 export async function createProfile(dealershipId, role, fullName, email) {
